@@ -10,10 +10,18 @@ $password = 'root';
         
      // クエリの実行
     $sql = "SELECT i.id,i.date,i.genre,i.content
-            FROM ir_tbl i";
+            FROM ir_tbl i
+            ORDER BY i.id desc";
 
             $stmt = $dbh->query($sql);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result_ir = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $sql = "SELECT r.id,r.date,r.genre,r.company,r.content
+            FROM release_tbl r
+            ORDER BY r.id desc";
+
+            $stmt = $dbh->query($sql);
+            $result_release = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
      }catch(PDOException $e){
          print("データベースの接続に失敗しました".$e->getMessage());
@@ -78,9 +86,6 @@ $password = 'root';
 </head>
 
 <body>
-
-
-
 
     <div class="image1">
         <h1>世の中にポジティブな変化を。</h1>
@@ -257,61 +262,18 @@ $password = 'root';
             <h2>ニュースリリース</h2>
             <section class="menu">
                 <ul>
-                    <li class="content">
-                        <time>1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                            <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                            <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                            <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                         <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                         <div class="text">
-                            <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                         <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                         <div class="text">
-                            <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">ニュースリリース</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    
+                    <?php
+                    foreach ($result_release as $value){
+                echo ' 
+                <li class="content">
+                    <time>'.$value["date"].'</time><span class="frame">'.$value["genre"].'</span><span class="com">'.$value["company"].'</span>
+                    <div class="text">
+                        <a href="#">'.$value["content"].'</a>
+                    </div>
+                </li>
+                ';
+                }
+                ?> 
                 </ul>
             </section>
             <div class="btn">
@@ -324,49 +286,18 @@ $password = 'root';
             <h2>IRニュース</h2>
             <section class="menu">
                 <ul>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                    <li class="content">
-                        <time>2022.1.1</time><span class="frame">IR資料</span>
-                        <div class="text">
-                        <a href="#">テスト</a>
-                        </div>
-                    </li>
-                
+                    <?php
+                    foreach ($result_ir as $value){
+                echo ' 
+                <li class="content">
+                    <time>'.$value["date"].'</time><span class="frame">'.$value["genre"].'</span>
+                    <div class="text">
+                        <a href="#">'.$value["content"].'</a>
+                    </div>
+                </li>
+                ';
+                }
+                ?> 
                 </ul>
             
             </section>

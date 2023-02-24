@@ -19,6 +19,12 @@ img {
 
 }
 
+/* ニュースの社名部分 */
+.com{
+    padding-left: 10px;
+    color: #ff0000;
+}
+
 .en a {
     background: rgb(230, 230, 230);
     border-radius: 3px;
@@ -206,6 +212,8 @@ a:hover {
 .newsArea{
     padding-top: 50px;
 }
+
+
 
 .content{
     border-bottom: 1px dotted #999;
